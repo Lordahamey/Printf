@@ -61,17 +61,3 @@ int _printf(const char *format, ...)
 	va_end(print_me);
 	return (c_idx);
 }
-/**
- * main - Check my code.
- *
- * Return: 0 Always.
- */
-
-int main(void)
-{
-	_printf("%c", 'A');
-	_printf("%s", "Andrew");
-	_printf("%s", "Akinola");
-	_printf("%%");
-	return (0);
-}
