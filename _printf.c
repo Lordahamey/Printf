@@ -11,13 +11,14 @@
  * Return: The number of character
  * that is excluding the '\0' byte.
  */
+int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
 	int format_c = 0, idx, c_idx = 0;
 	int c;
 	char *s;
 	va_list print_me;
-	
+
 	va_start(print_me, format);
 	if (format == NULL)
 	{
@@ -34,7 +35,7 @@ int _printf(const char *format, ...)
 		else
 		{
 			format_c++;
-			if (format[format_c] == '\0')
+			if (format[format_c] == '%')
 			{
 				write(1, format, 1);
 				c_idx++;
@@ -65,14 +66,14 @@ int _printf(const char *format, ...)
 /**
  * main - Check my code.
  *
- * Return. 0 Always.
+ * Return: 0 Always.
  */
 
-int main()
+int main(void)
 {
-        _printf("%c", 'A');
-        _printf("%s", "Andrew");
+	_printf("%c", 'A');
+	_printf("%s", "Andrew");
 	_printf("%s", "Akinola");
-        _printf("%%");
-        return(0);
+	_printf("%%");
+	return (0);
 }
