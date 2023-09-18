@@ -8,9 +8,8 @@
  *
  * Return: The number of character
  * that is excluding the '\0' byte.
- */;
-int	_printf(const char *format, ...)
-	_printf(cont char *format, ...);
+ */
+int _printf(const char *format, ...)
 {
 	int format_c = 0, idx, c_idx = 0;
 	int c = 0, integer = 0, calc_l = 0;
