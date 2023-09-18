@@ -74,10 +74,3 @@ int _printf(const char *format, ...)
 	va_end(print_me);
 	return (c_idx);
 }
-int main(void)
-{
-	_printf("me");
-	_printf("%c", 'a');
-	_printf("%d, %i", 2, 4);
-	return (0);
-}
