@@ -12,10 +12,8 @@
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int format_c = 0, idx, c_idx = 0;
-	int c = 0, integer = 0, calc_l = 0;
-	char integer_s[24];
-	char *s;
+	int format_c = 0, c_idx = 0;
+	char *b_str = 0;
 	va_list print_me;
 
 	va_start(print_me, format);
@@ -40,33 +38,33 @@ int _printf(const char *format, ...)
 				c_idx++;
 				format_c++;
 			}
-			else if (format[format_c] == 'd' || format[format_c] == 'i')
+			else
 			{
-				format++;
-				integer = va_arg(print_me, int);
-				calc_l = snprintf(integer_s, sizeof(integer_s), "%d", integer);
-				if ((calc_l < 0) || (calc_l >= (int)sizeof(integer_s)))
+				if (format[format_c] == 'c')
 				{
-					return (-1);
+					c_idx = c_idx + _printfc(print_me);
 				}
-				write(1, integer_s, calc_l);
-				c_idx += calc_l;
-			}
-			else if (format[format_c] == 'c')
-			{
-				c = va_arg(print_me, int);
-				write(1, &c, 1);
-				c_idx++;
-				format_c++;
-			}
-			else if (format[format_c] == 's')
-			{
-				s = va_arg(print_me, char *);
-				for (idx = 0; s[idx] != '\0'; idx++)
+				else if (format[format_c] == 's')
 				{
+					c_idx = c_idx + _printfs(print_me);
 				}
-				write(1, s, idx);
-				c_idx += idx;
+				else if (format[format_c] == 'd' || format[format_c] == 'i')
+				{
+					c_idx = c_idx + _printfd(print_me);
+				}
+				else if (format[format_c] == 'b')
+				{
+					b_str = b_binary(print_me);
+					{
+						if (b_str != NULL)
+						{
+							c_idx += strlen(b_str);
+							free(b_str);
+						}
+					}
+
+
+				}
 				format_c++;
 			}
 		}
